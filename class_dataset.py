@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from torch.utils.data import Dataset
-from PIL import Image
+from torchvision.io import read_image, ImageReadMode
 
 class PlantImageDataset(Dataset):
     def __init__(self, csv_file, root_dir, main_dir, transform=None):
@@ -14,7 +14,10 @@ class PlantImageDataset(Dataset):
     def __len__(self):
         return len(self.annotations)
     
-    def ___getitem__(self, index):
+    def __getitem__(self, index):
         img_path = os.path.join(self.root_dir, f"{self.annotations.iloc[index, 1]}/{self.annotations.iloc[index, 0]}")
-        im = Image.open(img_path)
-        im.show()   
+        im = read_image(img_path)
+        if(self.transform):
+            im = self.transform(im)
+        label = self.annotations.iloc[index, 1]
+        return im, label
