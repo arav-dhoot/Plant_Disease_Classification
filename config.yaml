@@ -1,0 +1,24 @@
+main_dir:
+  new_plants_disease: '/Users/aravdhoot/Plant_Disease_Classification/data/New Plants Diseases Dataset'
+  plant_disease_recognition: '/Users/aravdhoot/Plant_Disease_Classification/data/Plant Disease Recognition'
+  plant_pathology: '/Users/aravdhoot/Plant_Disease_Classification/data/plant-pathology-2020-fgvc7'
+
+root_dir:
+  new_plants_disease:
+    train: '/Users/aravdhoot/Plant_Disease_Classification/data/New Plants Diseases Dataset/New Plant Diseases Dataset(Augmented)/New Plant Diseases Dataset(Augmented)/train'
+    valid: '/Users/aravdhoot/Plant_Disease_Classification/data/New Plants Diseases Dataset/New Plant Diseases Dataset(Augmented)/New Plant Diseases Dataset(Augmented)/valid'
+  plant_disease_recognition:
+    train: '/Users/aravdhoot/Plant_Disease_Classification/data/Plant Disease Recognition/Train/Train'
+    valid: '/Users/aravdhoot/Plant_Disease_Classification/data/Plant Disease Recognition/Validation/Validation'
+    test: '/Users/aravdhoot/Plant_Disease_Classification/data/Plant Disease Recognition/Test/Test'
+  plant_pathology: '/Users/aravdhoot/Plant_Disease_Classification/data/plant-pathology-2020-fgvc7/Train'
+  
+csv:
+  new_plants_disease: 
+    train: 'new_plants_disease_train.csv'
+    valid: 'new_plants_disease_valid.csv'
+  plant_disease_recognition:
+    train: 'plants_disease__recognition_train.csv'
+    valid: 'plants_disease__recognition_valid.csv'
+    test: 'plants_disease__recognition_test.csv'
+  plant_pathology: 'plant_pathology_train.csv'
