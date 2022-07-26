@@ -18,4 +18,3 @@ test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=Fa
 dataiter = iter(train_loader)
 images, labels = dataiter.next()
 print(images, labels)
-
