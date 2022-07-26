@@ -1,4 +1,5 @@
 from plant_pathology_class_dataset import PlantImageDataset
+from torch.utils import data
 from torch.utils.data import DataLoader
 import torchvision.transforms as T
 import torch 
@@ -12,7 +13,7 @@ dataset = PlantImageDataset(csv_file="plant_pathology_train.csv", root_dir="/Use
 train_dataset, valid_dataset = torch.utils.data.random_split(dataset, [round(0.8 * len(dataset)), round(0.2 * len(dataset))])
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
-
+valid_loader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False)
 
 dataiter = iter(train_loader)
 images, labels = dataiter.next()
