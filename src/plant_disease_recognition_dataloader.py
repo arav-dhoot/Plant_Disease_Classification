@@ -1,14 +1,18 @@
-from class_dataset import PlantImageDataset
+from datasets.class_dataset import PlantImageDataset
 from torch.utils.data import DataLoader
 import torchvision.transforms as T
+import yaml
+
+with open("/Users/aravdhoot/Plant_Disease_Classification/config.yaml", 'r') as yaml_file:
+    parse_yaml = yaml.safe_load(yaml_file)
 
 batch_size = 64
 transforms = T.Compose([T.Resize(size=(224, 224))])
-main_dir = "/Users/aravdhoot/Plant_Disease_Classification/data/Plant Disease Recognition"
+main_dir = parse_yaml['main_dir']['plant_disease_recognition']
 
-train_dataset = PlantImageDataset(csv_file="plants_disease__recognition_train.csv", root_dir="/Users/aravdhoot/Plant_Disease_Classification/data/Plant Disease Recognition/Train/Train", main_dir=main_dir, transform=transforms)
-valid_dataset = PlantImageDataset(csv_file="plants_disease__recognition_valid.csv", root_dir="/Users/aravdhoot/Plant_Disease_Classification/data/Plant Disease Recognition/Validation/Validation", main_dir=main_dir, transform=transforms)
-test_dataset = PlantImageDataset(csv_file="plants_disease__recognition_test.csv", root_dir="/Users/aravdhoot/Plant_Disease_Classification/data/Plant Disease Recognition/Test/Test", main_dir=main_dir, transform=transforms)
+train_dataset = PlantImageDataset(csv_file=parse_yaml['csv']['plant_disease_recognition']['train'], root_dir=parse_yaml['root_dir']['plant_disease_recognition']['train'], main_dir=main_dir, transform=transforms)
+valid_dataset = PlantImageDataset(csv_file=parse_yaml['csv']['plant_disease_recognition']['valid'], root_dir=parse_yaml['root_dir']['plant_disease_recognition']['valid'], main_dir=main_dir, transform=transforms)
+test_dataset = PlantImageDataset(csv_file=parse_yaml['csv']['plant_disease_recognition']['test'], root_dir=parse_yaml['root_dir']['plant_disease_recognition']['test'], main_dir=main_dir, transform=transforms)
 
 
 train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
