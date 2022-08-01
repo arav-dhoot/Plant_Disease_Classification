@@ -15,13 +15,14 @@ with open('../config/config.yaml', 'r') as yaml_file:
     parse_yaml = yaml.safe_load(yaml_file)
 
 
-
 if args.dataset == "new_plants":
 
     main_dir = parse_yaml['main_dir']['new_plants_disease']
 
     train_dataset = class_dataset_A.PlantImageDatasetA(csv_file=parse_yaml['csv']['new_plants_disease']['train'], root_dir=parse_yaml['root_dir']['new_plants_disease']['train'], main_dir=main_dir, transform=transforms)
     valid_dataset = class_dataset_A.PlantImageDatasetA(csv_file=parse_yaml['csv']['new_plants_disease']['valid'], root_dir=parse_yaml['root_dir']['new_plants_disease']['valid'], main_dir=main_dir, transform=transforms)
+
+    train_dataset, test_dataset = torch.utils.data.random_split(train_dataset, [round(0.8 * len(train_dataset)), round(0.2 * len(train_dataset))])
 
     train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     valid_loader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False)
@@ -45,7 +46,7 @@ elif args.dataset == 'plant_pathology':
 
     dataset = class_dataset_C.PlantImageDatasetC(csv_file=parse_yaml['csv']['plant_pathology'], root_dir=parse_yaml['root_dir']['plant_pathology'], main_dir=main_dir, transform=transforms)
 
-    train_dataset, valid_dataset = torch.utils.data.random_split(dataset, [round(0.8 * len(dataset)), round(0.2 * len(dataset))])
+    train_dataset, valid_dataset, test_dataset = torch.utils.data.random_split(dataset, [round(0.7 * len(dataset)), round(0.2 * len(dataset)), round(0.1 * len(dataset))])
 
     train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     valid_loader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False)
