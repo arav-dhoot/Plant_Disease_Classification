@@ -26,7 +26,8 @@ if args.dataset == "new_plants":
 
     train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     valid_loader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False)
-
+    test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
+    
 elif args.dataset == 'plant_disease':
 
     main_dir = parse_yaml['main_dir']['plant_disease_recognition']
@@ -34,7 +35,6 @@ elif args.dataset == 'plant_disease':
     train_dataset = class_dataset_B.PlantImageDatasetB(csv_file=parse_yaml['csv']['plant_disease_recognition']['train'], root_dir=parse_yaml['root_dir']['plant_disease_recognition']['train'], main_dir=main_dir, transform=transforms)
     valid_dataset = class_dataset_B.PlantImageDatasetB(csv_file=parse_yaml['csv']['plant_disease_recognition']['valid'], root_dir=parse_yaml['root_dir']['plant_disease_recognition']['valid'], main_dir=main_dir, transform=transforms)
     test_dataset = class_dataset_B.PlantImageDatasetB(csv_file=parse_yaml['csv']['plant_disease_recognition']['test'], root_dir=parse_yaml['root_dir']['plant_disease_recognition']['test'], main_dir=main_dir, transform=transforms)
-
 
     train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     valid_loader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False)
@@ -50,6 +50,7 @@ elif args.dataset == 'plant_pathology':
 
     train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
     valid_loader = DataLoader(dataset=valid_dataset, batch_size=batch_size, shuffle=False)
+    test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
 
 dataiter = iter(train_loader)
 images, labels = dataiter.next()
