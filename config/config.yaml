@@ -22,3 +22,8 @@ csv:
     valid: 'plants_disease__recognition_valid.csv'
     test: 'plants_disease__recognition_test.csv'
   plant_pathology: 'plant_pathology_train.csv'
+
+num_classes:
+  new_plants_disease: 38
+  plant_disease_recognition: 3
+  plant_pathology: 4

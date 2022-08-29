@@ -1,7 +1,11 @@
 import os
 import pandas as pd
+import torch
 from torch.utils.data import Dataset
-from torchvision.io import read_image, ImageReadMode
+from torchvision.io import read_image
+from PIL import Image
+import torchvision.transforms as T
+import numpy as np
 
 class PlantImageDatasetC(Dataset):
     def __init__(self, csv_file, root_dir, main_dir, transform=None):
@@ -15,9 +19,10 @@ class PlantImageDatasetC(Dataset):
         return len(self.annotations)
     
     def __getitem__(self, index):
-        img_path = os.path.join(self.root_dir, self.annotations.iloc[index, 0])
-        im = read_image(img_path)
+        img_path = os.path.join(self.root_dir, self.annotations['Image'][index])
+        im = Image.open(img_path)
+        image = T.functional.to_tensor(im)
         if(self.transform):
-            im = self.transform(im)
-        label = self.annotations.iloc[index, 1]
-        return im, label
+            image = self.transform(image)
+        label = self.annotations['Label'][index]
+        return image, label
